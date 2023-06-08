@@ -1,4 +1,4 @@
-import { Feature } from 'toolkit.extension/features/feature';
+import { Feature } from 'toolkit/extension/features/feature';
 
 export class CurrencyConverter extends Feature {
   ShouldInvoke() {
