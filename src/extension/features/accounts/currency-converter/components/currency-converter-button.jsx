@@ -35,7 +35,7 @@ export class CurrencyConverterButton extends React.Component {
         }
         newValue = parseFloat(oldAmountStr) * rate;
         newAmountStr = currencyChar + newValue.toFixed(2);
-        this.convertCurrency(bdiElement, newAmountStr);
+        convertCurrency(bdiElement, newAmountStr);
       });
     });
   };
@@ -44,4 +44,9 @@ export class CurrencyConverterButton extends React.Component {
     bdiElement.text(newAmountStr);
     // I'm assuming this is incorrect. Hope to IYH do it correctly/
   }
+}
+
+export function convertCurrency(bdiElement, newAmountStr) {
+  bdiElement.text(newAmountStr);
+  // I'm assuming this is incorrect. Hope to IYH do it correctly/
 }
