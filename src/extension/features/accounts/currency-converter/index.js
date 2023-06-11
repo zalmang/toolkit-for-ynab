@@ -6,6 +6,7 @@ import { CurrencyConverterButton } from './components/currency-converter-button'
 
 export class CurrencyConverter extends Feature {
   ShouldInvoke() {
+    console.log('Checking whether to invoke!');
     return isCurrentRouteAccountsPage();
   }
 
@@ -14,11 +15,16 @@ export class CurrencyConverter extends Feature {
     if (document.querySelector('.tk-currency-converter')) {
       return;
     }
-    componentAfter(<CurrencyConverterButton />, document.querySelector('')); // '.accounts-toolbar-edit-transaction??????'//
+    console.log('Generateing the button...');
+    componentAfter(
+      <CurrencyConverterButton />,
+      document.querySelector('.accounts-toolbar-edit-transaction')
+    );
   }
 
   destroy() {
     $('.tk-currency-converter').remove();
+    // why do i have to do 'accounts-toolbar-left'?
     $('accounts-toolbar-left').removeClass('tk-accounts-toolbar-left');
   }
 
