@@ -5,7 +5,7 @@ import { isCurrentRouteAccountsPage } from 'toolkit/extension/utils/ynab';
 import { CurrencyConverterButton } from './components/currency-converter-button';
 
 export class CurrencyConverter extends Feature {
-  ShouldInvoke() {
+  shouldInvoke() {
     console.log('Checking whether to invoke!');
     return isCurrentRouteAccountsPage();
   }

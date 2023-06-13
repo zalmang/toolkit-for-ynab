@@ -2,7 +2,7 @@ module.exports = {
   name: 'CurrencyConverter',
   type: 'checkbox',
   default: false,
-  section: 'budget',
+  section: 'accounts',
   title: 'Currency Converter',
   description: 'Convert transactions to a different currency',
 };
