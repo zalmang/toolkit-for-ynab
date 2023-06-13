@@ -14,39 +14,24 @@ export class CurrencyConverterButton extends React.Component {
     // for future versions: create modal to enter a currency rate
     console.log('And so it begins...');
     let rate = 3.75;
-    let subElements;
-    let bdiElement;
-    let bdiText;
-    let currencyChar;
-    let oldAmountStr;
-    let newValue;
-    let newAmountStr;
     console.log('Beginning conversion');
-    const elements = $('.is-checked');
-    elements.each(function () {
-      subElements = $(this).find('.positive.currency');
-      subElements.each(function () {
-        bdiElement = $(this).find('bdi');
-        bdiText = bdiElement.text();
-        currencyChar = bdiText[0];
-        oldAmountStr = '';
-        for (let i = 1; i < bdiText.length; i++) {
-          oldAmountStr += bdiText.charAt(i);
-        }
-        newValue = parseFloat(oldAmountStr) * rate;
-        newAmountStr = currencyChar + newValue.toFixed(2);
-        convertCurrency(bdiElement, newAmountStr);
-      });
-    });
+    const inflows = $('.is-checked .ynab-grid-cell-outflow .ember-text-field').toArray();
+    const outflows = $('.is-checked .ynab-grid-cell-inflow .ember-text-field').toArray();
+    for (let i = 0; i < inflows.length; i++) {
+      let currIn = inflows[i];
+      let currOut = outflows[i];
+      if (currIn.value !== false) {
+        convert(currIn, rate);
+      } else if (currOut.value !== false) {
+        convert(currOut, rate);
+      }
+    }
   };
-
-  convertCurrency(bdiElement, newAmountStr) {
-    bdiElement.text(newAmountStr);
-    // I'm assuming this is incorrect. Hope to IYH do it correctly/
-  }
 }
 
-export function convertCurrency(bdiElement, newAmountStr) {
-  bdiElement.text(newAmountStr);
-  // I'm assuming this is incorrect. Hope to IYH do it correctly/
+export function convert(htmlElement, rate) {
+  let currValue = htmlElement.value;
+  htmlElement.value = ynab.formatCurrency(currValue * rate * 1000);
+  htmlElement.dispactEvent(new Event('change'));
+  htmlElement.dispatchEvent(new Event('blur'));
 }
